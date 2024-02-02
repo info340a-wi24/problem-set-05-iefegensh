@@ -71,7 +71,20 @@ let fizzBuzz = function (number) {
    each letter, increase the value associated with that key by one. Watch out 
    for if the letter is not in the Object yet!
    You can test this method with a word like "Mississippi". */
+let getLetterFrequencies = function(input) {
+  let res = {};
+  for (let i = 0; i < input.length; i++) {
+    let char = input[i];
+    if (res[char] === undefined) {
+      res[char] = 1;
+    } else {
+      res[char]++;
+    }
+ }
+ return res;
+};
 
+console.log(getLetterFrequencies("Mississippi"));
    
 
 /* Create a variable `deck` that represents a deck of modern playing cards
@@ -86,7 +99,19 @@ let fizzBuzz = function (number) {
     
     You can log out the `deck` to check your work! */
 
-    
+let deck = [];
+let suits = ["hearts", "diamonds", "clubs", "spades"];
+for (let suit of suits) {
+  for (let rank = 2; rank <= 14; rank++) {
+    let card = { suit: suit, rank: rank };
+    deck.push(card);
+  }
+}
+
+console.log(deck);
+
+
+  
 
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
