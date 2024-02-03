@@ -103,7 +103,7 @@ let deck = [];
 let suits = ["hearts", "diamonds", "clubs", "spades"];
 for (let suit of suits) {
   for (let rank = 2; rank <= 14; rank++) {
-    let card = { suit: suit, rank: rank };
+    let card = {suit: suit, rank: rank};
     deck.push(card);
   }
 }
@@ -120,19 +120,42 @@ console.log(deck);
    objects (e.g., a Poker hand) and returns whether or not the Queen of Hearts
    is in that array.
    Hint: use a loop to check each card. */
+let containsQueenOfHearts = function (cards) {
+  for (let i = 0; i < cards.length; i++) {
+    if (cards[i].suit === "hearts" && cards[i].rank === 12) {
+      return true;
+    } 
+  }
+  return false;
+};
 
-   
+
 
 /* Define a function `getHighCard()` that takes in an array of "card" objects
   and returns the card object with the highest value. The "high card" is the one
   with the highest rank. Cards of different suits but the same rank are 
   considered to have the same value, and either is a valid result */
-
-  
+let getHighCard = function (cards)  {
+  let maxCard = cards[0];
+  for (let i = 1; i < cards.length; i++) {
+    if (maxCard.rank < cards[i].rank) {
+      maxCard = cards[i];
+    }
+  }
+  return maxCard;
+};
 
 /* Define a function `isFlush()` that takes in an array of "card" objects and
    returns whether or not the cards all have the same _suit_. */
-
+let isFlush = function (cards) {
+  let flushSuit = cards[0].suit;
+  for (let i = 1; i < cards.length; i++) {
+    if (cards[i].suit !== flushSuit) {
+      return false;
+    }
+  }
+  return true;
+};
    
 
 /* Extra challenge: define a function `hasPair()` that takes in an array of 
@@ -140,8 +163,22 @@ console.log(deck);
    cards with the same _rank_) in the array.
    Double challenge: return the rank of the pair of cards with the highest rank 
    (e.g., if the hand contains more than one pair!) */
-
-
+// let hasPair = function (cards) {
+//   // count the number of rank
+//   let rankCount = {};
+  
+//   for (let i = 0; i < cards.length; i++) {
+//     let rank = cards[i].rank;
+//     // if we already have a certain rank, this rank number increment
+//     // otherwise, we set it occur once
+//     if (rankCount[rank]) {
+//       rankCount[rank] += 1; 
+//     } else {
+//       rankCount[rank] = 1; 
+//     }
+//   }
+//   // find if there exist pair or even max pair
+// };
 
 //Make functions and variables available to tester. DO NOT MODIFY THIS.
 if(typeof module !== 'undefined' && module.exports){
