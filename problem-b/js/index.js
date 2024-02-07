@@ -111,8 +111,6 @@ for (let suit of suits) {
 console.log(deck);
 
 
-  
-
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
 
@@ -163,22 +161,53 @@ let isFlush = function (cards) {
    cards with the same _rank_) in the array.
    Double challenge: return the rank of the pair of cards with the highest rank 
    (e.g., if the hand contains more than one pair!) */
-// let hasPair = function (cards) {
-//   // count the number of rank
-//   let rankCount = {};
-  
-//   for (let i = 0; i < cards.length; i++) {
-//     let rank = cards[i].rank;
-//     // if we already have a certain rank, this rank number increment
-//     // otherwise, we set it occur once
-//     if (rankCount[rank]) {
-//       rankCount[rank] += 1; 
-//     } else {
-//       rankCount[rank] = 1; 
-//     }
-//   }
-//   // find if there exist pair or even max pair
-// };
+
+let maxPair = function(cards) {
+  // object : [rank: occurance]
+  let rankCount = {}; 
+  // count the occurance of the rank
+  for (let i = 0; i < cards.length; i++) {
+    let rank = cards[i].rank;
+    if (rankCount[rank]) {
+      rankCount[rank] += 1;
+    } else {
+      rankCount[rank] = 1;
+    }
+  }
+
+  let maxPairRank = null;
+  for (let rank in rankCount) {
+    // check if there is a pair 
+    if (rankCount[rank] >= 2) { 
+      let rankInt = parseInt(rank); 
+      if (maxPairRank === null || rankInt > maxPairRank) {
+        maxPairRank = rankInt; 
+      } 
+    } else {
+      console.log("Sorry! Player does not have a pair");
+    }
+  }
+  return maxPairRank;
+};
+
+let test = maxPair(deck);
+console.log(test); // 14 
+
+let myHand = [
+  {suit: "hearts", rank: 4},
+  {suit: "spades", rank: 11},
+  {suit: "diamonds", rank: 4},
+  {suit: "clubs", rank: 13},
+  {suit: "hearts", rank: 13}
+];
+console.log(maxPair(myHand)); // 13
+
+let myHand2 = [
+  {suit: "hearts", rank: 4},
+  {suit: "spades", rank: 11}
+];
+
+console.log(maxPair(myHand2)); // "Sorry! Player does not have a pair"
 
 //Make functions and variables available to tester. DO NOT MODIFY THIS.
 if(typeof module !== 'undefined' && module.exports){
